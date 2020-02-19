@@ -9,8 +9,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var unitConversion = 2
+    
+    let unitConversions = ["Temp", "Length", "Time", "Volume"]
+    
     var body: some View {
-        Text("Hello, World!")
+    NavigationView {
+        Form {
+            Section(header: Text("What do you want to convert?")) {
+                Picker("Units", selection:
+                $unitConversion) {
+                    ForEach(0 ..< unitConversions.count) {
+                        Text("\(self.unitConversions[$0])")
+                    }
+            }
+                .pickerStyle(SegmentedPickerStyle())
+            
+            }
+            }
+        }
     }
 }
 
