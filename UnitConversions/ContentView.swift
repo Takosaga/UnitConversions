@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var unitConversion = 2
+    @State private var unitConversion = 1
+    @State private var unitConvert = 1
     
-    let unitConversions = ["Temp", "Length", "Time", "Volume"]
+    let unitConversions = ["Celsius", "Fahrenheit", "Kelvin"]
+    
+    let unitConverted = ["Celsius", "Fahrenheit", "Kelvin"]
+    
     
     var body: some View {
     NavigationView {
@@ -26,7 +30,16 @@ struct ContentView: View {
                 .pickerStyle(SegmentedPickerStyle())
             
             }
+            Section(header: Text("What unit do you want to convert to?")){
+                Picker("Starting Units", selection: $unitConvert ){
+                    ForEach(0 ..< unitConverted.count) {
+                        Text("\(self.unitConverted[$0])")
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
+            }
+            .navigationBarTitle("Tempature Conversions")
         }
     }
 }
