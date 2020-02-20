@@ -11,10 +11,20 @@ import SwiftUI
 struct ContentView: View {
     @State private var unitConversion = 1
     @State private var unitConvert = 1
+    @State private var amount = ""
     
-    let unitConversions = ["Celsius", "Fahrenheit", "Kelvin"]
+    let unitConversions = ["meters", "kilometers", "feet", "yards", "miles"]
     
-    let unitConverted = ["Celsius", "Fahrenheit", "Kelvin"]
+    let unitConverted = ["meters", "kilometers", "feet", "yards", "miles"]
+    
+    var convertedUnit: Measurement<UnitLength>  {
+        let initialUnit = Double(amount) ?? 0
+        let start = UnitLength(symbol: "UnitDuration.\(unitConversions[unitConversion])")
+        let startingUnit = Measurement(value: initialUnit, unit: start)
+        let end = UnitLength(symbol: "UnitDuration.\(unitConverted[unitConvert])")
+        return startingUnit.converted(to: end)
+    }
+  
     
     
     var body: some View {
@@ -28,8 +38,13 @@ struct ContentView: View {
                     }
             }
                 .pickerStyle(SegmentedPickerStyle())
-            
             }
+            Section {
+                TextField("Amount", text: $amount)
+                    .keyboardType(.decimalPad)
+                
+            }
+
             Section(header: Text("What unit do you want to convert to?")){
                 Picker("Starting Units", selection: $unitConvert ){
                     ForEach(0 ..< unitConverted.count) {
