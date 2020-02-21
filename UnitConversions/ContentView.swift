@@ -17,12 +17,85 @@ struct ContentView: View {
     
     let unitConverted = ["meters", "kilometers", "feet", "yards", "miles"]
     
-    var convertedUnit: Measurement<UnitLength>  {
+    var convertedUnit: String {
         let initialUnit = Double(amount) ?? 0
-        let start = UnitLength(symbol: "UnitDuration.\(unitConversions[unitConversion])")
-        let startingUnit = Measurement(value: initialUnit, unit: start)
-        let end = UnitLength(symbol: "UnitDuration.\(unitConverted[unitConvert])")
-        return startingUnit.converted(to: end)
+        if unitConversion == 0 && unitConvert == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+            return "\(startingUnit.converted(to: UnitLength.meters))"
+        } else if unitConversion == 0 && unitConvert == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+            return "\(startingUnit.converted(to: UnitLength.kilometers))"
+        } else if unitConversion == 0 && unitConvert == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+            return "\(startingUnit.converted(to: UnitLength.feet))"
+        } else if unitConversion == 0 && unitConvert == 3{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+            return "\(startingUnit.converted(to: UnitLength.yards))"
+        } else if unitConversion == 0 && unitConvert == 4{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+            return "\(startingUnit.converted(to: UnitLength.miles))"
+        } else if unitConversion == 1 && unitConvert == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+            return "\(startingUnit.converted(to: UnitLength.meters))"
+        } else if unitConversion == 1 && unitConvert == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+            return "\(startingUnit.converted(to: UnitLength.kilometers))"
+        } else if unitConversion == 1 && unitConvert == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+            return "\(startingUnit.converted(to: UnitLength.feet))"
+        } else if unitConversion == 1 && unitConvert == 3{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+            return "\(startingUnit.converted(to: UnitLength.yards))"
+        } else if unitConversion == 1 && unitConvert == 4{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+            return "\(startingUnit.converted(to: UnitLength.miles))"
+        } else if unitConversion == 2 && unitConvert == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+            return "\(startingUnit.converted(to: UnitLength.meters))"
+        } else if unitConversion == 2 && unitConvert == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+            return "\(startingUnit.converted(to: UnitLength.kilometers))"
+        } else if unitConversion == 2 && unitConvert == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+            return "\(startingUnit.converted(to: UnitLength.feet))"
+        } else if unitConversion == 2 && unitConvert == 3{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+            return "\(startingUnit.converted(to: UnitLength.yards))"
+        } else if unitConversion == 2 && unitConvert == 4{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+            return "\(startingUnit.converted(to: UnitLength.miles))"
+        } else if unitConversion == 3 && unitConvert == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+            return "\(startingUnit.converted(to: UnitLength.meters))"
+        } else if unitConversion == 3 && unitConvert == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+            return "\(startingUnit.converted(to: UnitLength.kilometers))"
+        } else if unitConversion == 3 && unitConvert == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+            return "\(startingUnit.converted(to: UnitLength.feet))"
+        } else if unitConversion == 3 && unitConvert == 3{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+            return "\(startingUnit.converted(to: UnitLength.yards))"
+        } else if unitConversion == 3 && unitConvert == 4{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+            return "\(startingUnit.converted(to: UnitLength.miles))"
+        } else if unitConversion == 4 && unitConvert == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+            return "\(startingUnit.converted(to: UnitLength.meters))"
+        } else if unitConversion == 4 && unitConvert == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+            return "\(startingUnit.converted(to: UnitLength.kilometers))"
+        } else if unitConversion == 4 && unitConvert == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+            return "\(startingUnit.converted(to: UnitLength.feet))"
+        } else if unitConversion == 4 && unitConvert == 3{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+            return "\(startingUnit.converted(to: UnitLength.yards))"
+        } else if unitConversion == 4 && unitConvert == 4{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+            return "\(startingUnit.converted(to: UnitLength.miles))"
+        }
+        return "Calculating!!!"
     }
   
     
@@ -53,6 +126,10 @@ struct ContentView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            Section(header: Text("Converted to: ")){
+                Text("\(convertedUnit)" )
+            }
+            
             }
             .navigationBarTitle("Tempature Conversions")
         }
