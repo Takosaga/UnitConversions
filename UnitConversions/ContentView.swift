@@ -9,16 +9,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    //Choice which type
+    @State private var typeChoice = 1
+    
+    //Choice which index unit to start
     @State private var unitConversion = 1
+    
+    //Choice which index unit to end
     @State private var unitConvert = 1
+    
+    //Amount duh
     @State private var amount = ""
     
-    let unitConversions = ["meters", "kilometers", "feet", "yards", "miles"]
+    //Unit types put into an array
+    let type = ["Temp", "Length", "Time", "Volume"]
+    let tempConversion = ["Celsius", "Fahrenheit", "Kelvin"]
+    let lengthConversion = ["meters", "kilometers", "feet", "yards", "miles"]
     
-    let unitConverted = ["meters", "kilometers", "feet", "yards", "miles"]
     
     var convertedUnit: String {
         let initialUnit = Double(amount) ?? 0
+        let intialType = Double(typeChoice)
+        
+        
+        //Mess to filter out for temp conversion
         if unitConversion == 0 && unitConvert == 0{
             let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
             return "\(startingUnit.converted(to: UnitLength.meters))"
@@ -95,6 +109,7 @@ struct ContentView: View {
             let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
             return "\(startingUnit.converted(to: UnitLength.miles))"
         }
+        
         return "Calculating!!!"
     }
   
@@ -103,35 +118,53 @@ struct ContentView: View {
     var body: some View {
     NavigationView {
         Form {
-            Section(header: Text("What do you want to convert?")) {
-                Picker("Units", selection:
-                $unitConversion) {
-                    ForEach(0 ..< unitConversions.count) {
-                        Text("\(self.unitConversions[$0])")
+            
+            //Picker for which type
+            Section(header: Text("What unit type do you want to convert?")) {
+                Picker("Type", selection:
+                $typeChoice) {
+                    ForEach(0 ..< type.count) {
+                        Text("\(self.type[$0])")
                     }
             }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            
+            //Picker for which starting units
+            Section(header: Text("What do you want to convert?")) {
+                Picker("Units", selection:
+                $unitConversion) {
+                    ForEach(0 ..< lengthConversion.count) {
+                        Text("\(self.lengthConversion[$0])")
+                    }
+            }
+                .pickerStyle(SegmentedPickerStyle())
+            }
+            
+            //Textfield to input amount
             Section {
                 TextField("Amount", text: $amount)
                     .keyboardType(.decimalPad)
                 
             }
-
+            
+            //Picker for ending units
             Section(header: Text("What unit do you want to convert to?")){
                 Picker("Starting Units", selection: $unitConvert ){
-                    ForEach(0 ..< unitConverted.count) {
-                        Text("\(self.unitConverted[$0])")
+                    ForEach(0 ..< lengthConversion.count) {
+                        Text("\(self.lengthConversion[$0])")
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            
+            //Show final conversion
             Section(header: Text("Converted to: ")){
                 Text("\(convertedUnit)" )
             }
             
             }
-            .navigationBarTitle("Tempature Conversions")
+            .navigationBarTitle("Unit Conversions")
         }
     }
 }
