@@ -23,13 +23,46 @@ struct ContentView: View {
     
     //Unit types put into an array
     let type = ["Temp", "Length", "Time", "Volume"]
-    let tempConversion = ["Celsius", "Fahrenheit", "Kelvin"]
+    let tempConversion = ["Celsius", "Fahrenheit", "Kelvin", "", ""]
     let lengthConversion = ["meters", "kilometers", "feet", "yards", "miles"]
     
     
     var convertedUnit: String {
         let initialUnit = Double(amount) ?? 0
-        let intialType = Double(typeChoice)
+        let initialType = Double(typeChoice)
+        
+        
+        //Shorter code to convert temp
+        if initialType == 0 && unitConversion == 0{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitTemperature.celsius)
+            if unitConvert == 0{
+                return "\(startingUnit.converted(to: UnitTemperature.celsius))"
+            } else if unitConvert == 1{
+                return "\(startingUnit.converted(to: UnitTemperature.fahrenheit))"
+            } else{
+                return "\(startingUnit.converted(to: UnitTemperature.kelvin))"
+            }
+        }else if initialType == 0 && unitConversion == 1{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitTemperature.fahrenheit)
+            if unitConvert == 0{
+                return "\(startingUnit.converted(to: UnitTemperature.celsius))"
+            } else if unitConvert == 1{
+                return "\(startingUnit.converted(to: UnitTemperature.fahrenheit))"
+            } else{
+                return "\(startingUnit.converted(to: UnitTemperature.kelvin))"
+            }
+        } else if initialType == 0 && unitConversion == 2{
+            let startingUnit = Measurement(value: initialUnit, unit: UnitTemperature.kelvin)
+            if unitConvert == 0{
+                return "\(startingUnit.converted(to: UnitTemperature.celsius))"
+            } else if unitConvert == 1{
+                return "\(startingUnit.converted(to: UnitTemperature.fahrenheit))"
+            } else{
+                return "\(startingUnit.converted(to: UnitTemperature.kelvin))"
+            }
+        }
+            
+            
         
         
         //Mess to filter out for temp conversion
@@ -119,6 +152,7 @@ struct ContentView: View {
     NavigationView {
         Form {
             
+            
             //Picker for which type
             Section(header: Text("What unit type do you want to convert?")) {
                 Picker("Type", selection:
@@ -130,33 +164,49 @@ struct ContentView: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
             
+            
             //Picker for which starting units
             Section(header: Text("What do you want to convert?")) {
+                
                 Picker("Units", selection:
                 $unitConversion) {
-                    ForEach(0 ..< lengthConversion.count) {
-                        Text("\(self.lengthConversion[$0])")
+                    if typeChoice == 1{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.lengthConversion[$0])")
+                        }
+                    } else if typeChoice == 0{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.tempConversion[$0])")
+                        }
                     }
             }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            
             
             //Textfield to input amount
             Section {
                 TextField("Amount", text: $amount)
                     .keyboardType(.decimalPad)
-                
             }
+            
             
             //Picker for ending units
             Section(header: Text("What unit do you want to convert to?")){
                 Picker("Starting Units", selection: $unitConvert ){
-                    ForEach(0 ..< lengthConversion.count) {
-                        Text("\(self.lengthConversion[$0])")
+                    if typeChoice == 1{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.lengthConversion[$0])")
+                        }
+                    } else if typeChoice == 0{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.tempConversion[$0])")
+                        }
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            
             
             //Show final conversion
             Section(header: Text("Converted to: ")){
@@ -174,3 +224,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
