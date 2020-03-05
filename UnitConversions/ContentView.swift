@@ -25,7 +25,8 @@ struct ContentView: View {
     let type = ["Temp", "Length", "Time", "Volume"]
     let tempConversion = ["Celsius", "Fahrenheit", "Kelvin", "", ""]
     let lengthConversion = ["meters", "kilometers", "feet", "yards", "miles"]
-    
+    let timeConversion = ["seconds", "minutes", "hours", "", ""]
+    let volumeConversion = ["milliliters", "liters", "cups", "pints", "gallons"]
     
     var convertedUnit: String {
         let initialUnit = Double(amount) ?? 0
@@ -63,85 +64,120 @@ struct ContentView: View {
         }
             
             
-        
-        
+                
         //Mess to filter out for temp conversion
-        if unitConversion == 0 && unitConvert == 0{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
-            return "\(startingUnit.converted(to: UnitLength.meters))"
-        } else if unitConversion == 0 && unitConvert == 1{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
-            return "\(startingUnit.converted(to: UnitLength.kilometers))"
-        } else if unitConversion == 0 && unitConvert == 2{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
-            return "\(startingUnit.converted(to: UnitLength.feet))"
-        } else if unitConversion == 0 && unitConvert == 3{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
-            return "\(startingUnit.converted(to: UnitLength.yards))"
-        } else if unitConversion == 0 && unitConvert == 4{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
-            return "\(startingUnit.converted(to: UnitLength.miles))"
-        } else if unitConversion == 1 && unitConvert == 0{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
-            return "\(startingUnit.converted(to: UnitLength.meters))"
-        } else if unitConversion == 1 && unitConvert == 1{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
-            return "\(startingUnit.converted(to: UnitLength.kilometers))"
-        } else if unitConversion == 1 && unitConvert == 2{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
-            return "\(startingUnit.converted(to: UnitLength.feet))"
-        } else if unitConversion == 1 && unitConvert == 3{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
-            return "\(startingUnit.converted(to: UnitLength.yards))"
-        } else if unitConversion == 1 && unitConvert == 4{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
-            return "\(startingUnit.converted(to: UnitLength.miles))"
-        } else if unitConversion == 2 && unitConvert == 0{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
-            return "\(startingUnit.converted(to: UnitLength.meters))"
-        } else if unitConversion == 2 && unitConvert == 1{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
-            return "\(startingUnit.converted(to: UnitLength.kilometers))"
-        } else if unitConversion == 2 && unitConvert == 2{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
-            return "\(startingUnit.converted(to: UnitLength.feet))"
-        } else if unitConversion == 2 && unitConvert == 3{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
-            return "\(startingUnit.converted(to: UnitLength.yards))"
-        } else if unitConversion == 2 && unitConvert == 4{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
-            return "\(startingUnit.converted(to: UnitLength.miles))"
-        } else if unitConversion == 3 && unitConvert == 0{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
-            return "\(startingUnit.converted(to: UnitLength.meters))"
-        } else if unitConversion == 3 && unitConvert == 1{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
-            return "\(startingUnit.converted(to: UnitLength.kilometers))"
-        } else if unitConversion == 3 && unitConvert == 2{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
-            return "\(startingUnit.converted(to: UnitLength.feet))"
-        } else if unitConversion == 3 && unitConvert == 3{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
-            return "\(startingUnit.converted(to: UnitLength.yards))"
-        } else if unitConversion == 3 && unitConvert == 4{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
-            return "\(startingUnit.converted(to: UnitLength.miles))"
-        } else if unitConversion == 4 && unitConvert == 0{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
-            return "\(startingUnit.converted(to: UnitLength.meters))"
-        } else if unitConversion == 4 && unitConvert == 1{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
-            return "\(startingUnit.converted(to: UnitLength.kilometers))"
-        } else if unitConversion == 4 && unitConvert == 2{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
-            return "\(startingUnit.converted(to: UnitLength.feet))"
-        } else if unitConversion == 4 && unitConvert == 3{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
-            return "\(startingUnit.converted(to: UnitLength.yards))"
-        } else if unitConversion == 4 && unitConvert == 4{
-            let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
-            return "\(startingUnit.converted(to: UnitLength.miles))"
-        }
+        if initialType == 1{
+            if unitConversion == 0 && unitConvert == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+                return "\(startingUnit.converted(to: UnitLength.meters))"
+            } else if unitConversion == 0 && unitConvert == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+                return "\(startingUnit.converted(to: UnitLength.kilometers))"
+            } else if unitConversion == 0 && unitConvert == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+                return "\(startingUnit.converted(to: UnitLength.feet))"
+            } else if unitConversion == 0 && unitConvert == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+                return "\(startingUnit.converted(to: UnitLength.yards))"
+            } else if unitConversion == 0 && unitConvert == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.meters)
+                return "\(startingUnit.converted(to: UnitLength.miles))"
+            } else if unitConversion == 1 && unitConvert == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+                return "\(startingUnit.converted(to: UnitLength.meters))"
+            } else if unitConversion == 1 && unitConvert == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+                return "\(startingUnit.converted(to: UnitLength.kilometers))"
+            } else if unitConversion == 1 && unitConvert == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+                return "\(startingUnit.converted(to: UnitLength.feet))"
+            } else if unitConversion == 1 && unitConvert == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+                return "\(startingUnit.converted(to: UnitLength.yards))"
+            } else if unitConversion == 1 && unitConvert == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.kilometers)
+                return "\(startingUnit.converted(to: UnitLength.miles))"
+            } else if unitConversion == 2 && unitConvert == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+                return "\(startingUnit.converted(to: UnitLength.meters))"
+            } else if unitConversion == 2 && unitConvert == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+                return "\(startingUnit.converted(to: UnitLength.kilometers))"
+            } else if unitConversion == 2 && unitConvert == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+                return "\(startingUnit.converted(to: UnitLength.feet))"
+            } else if unitConversion == 2 && unitConvert == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+                return "\(startingUnit.converted(to: UnitLength.yards))"
+            } else if unitConversion == 2 && unitConvert == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.feet)
+                return "\(startingUnit.converted(to: UnitLength.miles))"
+            } else if unitConversion == 3 && unitConvert == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+                return "\(startingUnit.converted(to: UnitLength.meters))"
+            } else if unitConversion == 3 && unitConvert == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+                return "\(startingUnit.converted(to: UnitLength.kilometers))"
+            } else if unitConversion == 3 && unitConvert == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+                return "\(startingUnit.converted(to: UnitLength.feet))"
+            } else if unitConversion == 3 && unitConvert == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+                return "\(startingUnit.converted(to: UnitLength.yards))"
+            } else if unitConversion == 3 && unitConvert == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.yards)
+                return "\(startingUnit.converted(to: UnitLength.miles))"
+            } else if unitConversion == 4 && unitConvert == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+                return "\(startingUnit.converted(to: UnitLength.meters))"
+            } else if unitConversion == 4 && unitConvert == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+                return "\(startingUnit.converted(to: UnitLength.kilometers))"
+            } else if unitConversion == 4 && unitConvert == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+                return "\(startingUnit.converted(to: UnitLength.feet))"
+            } else if unitConversion == 4 && unitConvert == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+                return "\(startingUnit.converted(to: UnitLength.yards))"
+            } else if unitConversion == 4 && unitConvert == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitLength.miles)
+                return "\(startingUnit.converted(to: UnitLength.miles))"
+            }
+    }
+        
+        //pretty much copy of temp except for volume
+        if initialType == 2 {
+            if unitConversion == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitDuration.seconds)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitDuration.seconds))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitDuration.minutes))"
+                } else {
+                    return "\(startingUnit.converted(to: UnitDuration.hours))"
+                }
+            } else if unitConversion == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitDuration.minutes)
+                    if unitConvert == 0{
+                        return "\(startingUnit.converted(to: UnitDuration.seconds))"
+                    } else if unitConvert == 1{
+                        return "\(startingUnit.converted(to: UnitDuration.minutes))"
+                    } else {
+                        return "\(startingUnit.converted(to: UnitDuration.hours))"
+                    }
+            } else if unitConversion == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitDuration.hours)
+                    if unitConvert == 0{
+                        return "\(startingUnit.converted(to: UnitDuration.seconds))"
+                    } else if unitConvert == 1{
+                        return "\(startingUnit.converted(to: UnitDuration.minutes))"
+                    } else {
+                        return "\(startingUnit.converted(to: UnitDuration.hours))"
+                    }
+                }
+            }
+        
+
         
         return "Calculating!!!"
     }
@@ -178,6 +214,14 @@ struct ContentView: View {
                         ForEach(0 ..< 5) {
                             Text("\(self.tempConversion[$0])")
                         }
+                    } else if typeChoice == 2{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.timeConversion[$0])")
+                        }
+                    } else if typeChoice == 3{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.volumeConversion[$0])")
+                        }
                     }
             }
                 .pickerStyle(SegmentedPickerStyle())
@@ -202,8 +246,16 @@ struct ContentView: View {
                         ForEach(0 ..< 5) {
                             Text("\(self.tempConversion[$0])")
                         }
+                    } else if typeChoice == 2{
+                                ForEach(0 ..< 5) {
+                            Text("\(self.timeConversion[$0])")
+                            }
+                    }else if typeChoice == 3{
+                        ForEach(0 ..< 5) {
+                            Text("\(self.volumeConversion[$0])")
+                        }
                     }
-                }
+                    }
                 .pickerStyle(SegmentedPickerStyle())
             }
             
