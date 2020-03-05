@@ -177,6 +177,75 @@ struct ContentView: View {
                 }
             }
         
+        if initialType == 3 {
+            if unitConversion == 0{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitVolume.milliliters)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitVolume.milliliters))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitVolume.liters))"
+                } else if unitConvert == 2 {
+                    return "\(startingUnit.converted(to: UnitVolume.cups))"
+                } else if unitConvert == 3 {
+                    return "\(startingUnit.converted(to: UnitVolume.pints))"
+                } else{
+                    return "\(startingUnit.converted(to: UnitVolume.gallons))"
+                }
+            } else if unitConversion == 1{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitVolume.liters)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitVolume.milliliters))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitVolume.liters))"
+                } else if unitConvert == 2 {
+                    return "\(startingUnit.converted(to: UnitVolume.cups))"
+                } else if unitConvert == 3 {
+                    return "\(startingUnit.converted(to: UnitVolume.pints))"
+                } else{
+                    return "\(startingUnit.converted(to: UnitVolume.gallons))"
+                }
+            } else if unitConversion == 2{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitVolume.cups)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitVolume.milliliters))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitVolume.liters))"
+                } else if unitConvert == 2 {
+                    return "\(startingUnit.converted(to: UnitVolume.cups))"
+                } else if unitConvert == 3 {
+                    return "\(startingUnit.converted(to: UnitVolume.pints))"
+                } else{
+                    return "\(startingUnit.converted(to: UnitVolume.gallons))"
+                }
+            } else if unitConversion == 3{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitVolume.pints)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitVolume.milliliters))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitVolume.liters))"
+                } else if unitConvert == 2 {
+                    return "\(startingUnit.converted(to: UnitVolume.cups))"
+                } else if unitConvert == 3 {
+                    return "\(startingUnit.converted(to: UnitVolume.pints))"
+                } else{
+                    return "\(startingUnit.converted(to: UnitVolume.gallons))"
+                }
+            } else if unitConversion == 4{
+                let startingUnit = Measurement(value: initialUnit, unit: UnitVolume.gallons)
+                if unitConvert == 0{
+                    return "\(startingUnit.converted(to: UnitVolume.milliliters))"
+                } else if unitConvert == 1{
+                    return "\(startingUnit.converted(to: UnitVolume.liters))"
+                } else if unitConvert == 2 {
+                    return "\(startingUnit.converted(to: UnitVolume.cups))"
+                } else if unitConvert == 3 {
+                    return "\(startingUnit.converted(to: UnitVolume.pints))"
+                } else{
+                    return "\(startingUnit.converted(to: UnitVolume.gallons))"
+                }
+            }
+        }
+        
 
         
         return "Calculating!!!"
